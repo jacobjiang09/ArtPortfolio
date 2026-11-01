@@ -1,0 +1,48 @@
+{%- comment -%}
+  Lists every image in /photos/<folder>/ automatically.
+  Usage: {% include gallery.html folder="art" %}
+{%- endcomment -%}
+{%- assign prefix = "/photos/" | append: include.folder | append: "/" -%}
+{%- assign exts = ".jpg,.jpeg,.png,.gif,.webp,.avif,.JPG,.JPEG,.PNG,.GIF,.WEBP,.AVIF" | split: "," -%}
+{%- assign files = site.static_files | sort: "name" | reverse -%}
+{%- assign count = 0 -%}
+<div class="grid">
+{%- for file in files -%}
+  {%- if file.path contains prefix -%}{%- if exts contains file.extname -%}
+    {%- assign count = count | plus: 1 -%}
+    {%- assign key = file.name -%}
+    {%- assign cap = site.data.captions[key] -%}
+    {%- if cap and cap.title -%}
+      {%- assign title = cap.title -%}
+    {%- else -%}
+      {%- comment -%} Drop leading date parts like "2025-06-" from the title {%- endcomment -%}
+      {%- assign parts = file.basename | replace: "_", "-" | split: "-" -%}
+      {%- assign words = "" -%}
+      {%- assign started = false -%}
+      {%- for part in parts -%}
+        {%- assign stripped = part | remove: "0" | remove: "1" | remove: "2" | remove: "3" | remove: "4" | remove: "5" | remove: "6" | remove: "7" | remove: "8" | remove: "9" -%}
+        {%- if started or stripped != "" -%}
+          {%- assign started = true -%}
+          {%- assign words = words | append: " " | append: part -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign title = words | strip | capitalize -%}
+      {%- if title == "" -%}{%- assign title = file.basename -%}{%- endif -%}
+    {%- endif -%}
+    <figure class="piece">
+      <a href="{{ file.path | relative_url }}" data-title="{{ title | escape }}" data-details="{{ cap.details | escape }}">
+        <img src="{{ file.path | relative_url }}" alt="{{ title | escape }}" loading="lazy" decoding="async">
+      </a>
+      <figcaption>
+        <span class="t">{{ title }}</span>
+        {%- if cap.details %}<span class="d">{{ cap.details }}</span>{% endif -%}
+      </figcaption>
+    </figure>
+  {%- endif -%}{%- endif -%}
+{%- endfor -%}
+</div>
+{%- if count == 0 -%}
+<p class="empty">New work coming soon.</p>
+{%- endif -%}
+
+  
