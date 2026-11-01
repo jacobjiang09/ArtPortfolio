@@ -1,1 +1,1 @@
-Live site: https://jacobjiang09.github.io/art-portfolio/
+Live site: https://jacobjiang09.github.io/ArtPortfolio/
