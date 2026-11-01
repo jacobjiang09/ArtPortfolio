@@ -1,0 +1,70 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#">{{ site.name }}</a>
+    <nav>
+      <a href="#art">Art</a>
+      <a href="#photography">Photography</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>{{ site.name }}</h1>
+      <p>{{ site.tagline }}</p>
+    </section>
+
+    <section id="art" class="section">
+      <h2>Art</h2>
+      {% include gallery.html folder="art" %}
+    </section>
+
+    <section id="photography" class="section">
+      <h2>Photography</h2>
+      {% include gallery.html folder="photography" %}
+    </section>
+
+    <section id="about" class="section about">
+      <h2>About</h2>
+      <p>{{ site.about }}</p>
+      {% if site.email != "" or site.instagram != "" %}
+      <p class="links">
+        {% if site.email != "" %}<a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}
+        {% if site.instagram != "" %}<a href="https://instagram.com/{{ site.instagram }}" rel="noopener">@{{ site.instagram }}</a>{% endif %}
+      </p>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer>&copy; {{ site.time | date: "%Y" }} {{ site.name }}</footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" aria-label="Close">&times;</button>
+    <button class="lb-prev" aria-label="Previous">&#8249;</button>
+    <figure>
+      <img alt="">
+      <figcaption><span class="t"></span><span class="d"></span></figcaption>
+    </figure>
+    <button class="lb-next" aria-label="Next">&#8250;</button>
+  </div>
+
+  <script src="{{ '/assets/js/lightbox.js' | relative_url }}"></script>
+</body>
+</html>
