@@ -1,0 +1,17 @@
+name: "Jacob Jiang"
+tagline: "Art & photography"
+email: "jacobjiang09@gmail.com"          
+instagram: ""        
+
+about: >-
+  I'm a future engineering student who likes art. I add new work here as I make it.
+
+# ------------------------------------------------------------
+baseurl: "ArtPortfolio"   
+title: "Jacob | Art & Photography"
+description: "Portfolio of art and photography by Jacob."
+exclude:
+  - README.md
+  - HOW-TO-ADD-PHOTOS.md
+  - photos/art/README.md
+  - photos/photography/README.md
