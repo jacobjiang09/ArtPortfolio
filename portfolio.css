@@ -96,3 +96,4 @@ footer { text-align: center; padding: 48px 16px; color: var(--muted); font-size:
   .lb-prev { left: 8px; } .lb-next { right: 8px; }
   .lightbox { grid-template-columns: 1fr; }
 }
+
